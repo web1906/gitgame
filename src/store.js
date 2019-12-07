@@ -18,6 +18,16 @@ export default new Vuex.Store({
           state.uname=unmae;
         }
       },
+      actions: { //专门负责发送异步ajax请求，从服务器端获取数据
+        login(context,user){ //context代表整个vuex对象
+          (async function(){
+            var result=await axios.get("/users/signin",{
+              params:user
+            });
+            context.commit("setUname",result.data.uname);
+          })()
+        }
+      },    
       actions:{
         modifyCount:(context)=>{
           setTimeout(()=>{

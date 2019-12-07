@@ -1,7 +1,7 @@
 <template>
     <div>
         <mt-header class="top"></mt-header>
-        <router-link to="/index"><img :src="img" class="image"/></router-link>
+        <router-link to="/index"><img :src="img1" class="image"/></router-link>
         <div class="title">商品详情</div>
         <router-link to="/my"><img :src="img2" class="right"/></router-link>
         <mt-swipe class="pro" :auto="2000" style="bottom:20px;">
@@ -51,15 +51,15 @@
                 <a href="javascript:;" class="buy-now">立即购买</a>
             </div>
             <div class="flex2 ml25">
-                <a href="javascript:;" class="add-to-cart" @click="cart">加入购物车</a>
+                <van-cell  @click="cart" class="add-to-cart">加入购物车</van-cell>
             </div>
         </div>
-        <div class="puop puop-bottom" style="width:100%; z-index:2019;" v-show="show">
-                    <div class="oppo overlayer">
+        <div class="puop puop-bottom" style="width:100%; z-index:2019;">
+                    <van-popup class="oppo overlayer" position="bottom" :style="{height:'50%'}" v-model="show">
                         <div class="items" v-for="(item,index) of list" :key="index">
                             <div class="header" >
                                 <div class="img_pic">
-                                    <img :src="'http://127.0.0.1:4000/'+item.img_url" class="uis" />
+                                    <img :src="'http://127.0.0.1:4000/'+item.img" class="uis" />
                                 </div>
                             <div class="main">
                                 <div class="price-wrap"><span class="price">{{item.price}}</span></div>
@@ -71,7 +71,7 @@
                         <div class="number-wrap">
                             <div class="number-line">
                                 <label for="number">购买数量</label>
-                                <div data-numbox-min="1" data-numbox-max="88" data-numbox-step="1" class="mui-numbox">
+                                <div data-numbox-max="88" class="mui-numbox">
                                     <mt-button class="mui-btn" @click="reduce(index)">-</mt-button>
                                     <input type="number" v-model="item.count" class="mui-input-numbox">
                                     <mt-button class="mui-btn" @click="add(index)">+</mt-button>
@@ -81,10 +81,10 @@
                     </div>
                         </div>
                         <div class="footers" v-for="(item,index) of list" :key="'info2-'+index">
-                            <a @click="addCart" :data-lid="item.lid" :data-lname="item.lname" :data-price="item.price">加入购物车</a>
+                            <a @click="addCart" :data-lid="item.lid" :data-lname="item.lname" :data-count="item.count" :data-price="item.price" :data-img="item.img">加入购物车</a>
                             <a>立即购买</a>
                         </div>
-                    </div>
+                    </van-popup>
                 </div>
             <div class="v-modal" style="z-index:2002" v-show="show"></div>
     </div>
@@ -109,10 +109,11 @@ export default {
                 {url: require('../../../wnyx/public/20170829102423766.jpg')},
                 {url: require('../../../wnyx/public/20170829102437952.jpg')}
                 ],
-            img:require("../../img/home.png"),
+            img1:require("../../img/home.png"),
             img2:require("../../img/user.png"),
             list:[],
-            show:false
+            show:false,
+            count:1
         }
     },
     created(){
@@ -144,7 +145,7 @@ export default {
             var price=event.target.dataset.price;
             var count=event.target.dataset.count;
             var img=event.target.dataset.img;
-            console.log(lid+":"+lname+":"+count+""+price);
+            console.log(lid+":"+lname+":"+count+":"+price);
             // 3:创建url请求服务器地址
             var url="addcart";
             // 4.创建obj添加参数
@@ -308,7 +309,7 @@ export default {
         height: 60px;
         background-color: #fc5353;
         text-align: center;
-        line-height: 60px;
+        line-height: 40px;
         color: #fff;
         font-size: 18px;
     }
@@ -350,11 +351,10 @@ export default {
         position: relative;
     }
     .oppo .items .header .img_pic{
-        width: 100px;
-        height: 100px;
+        width: 20%;
         position: absolute;
-        top: -28px;
-        left: 10px;
+        top: -5px;
+        left: 35px;
         border-radius: 4px;
         overflow: hidden;
         border: 1px solid rgba(0, 0, 0, 0.1);
@@ -398,7 +398,8 @@ export default {
     .body{margin-top:15px;}
     .mui-numbox{
         display: inline-block;
-        float: right;
+        position: relative;
+        right: -180px;
     }
     .mui-btn{height: 30px;}
     .mui-input-numbox{
@@ -408,9 +409,9 @@ export default {
     }
     .footer{
         width: 100%;
-        height: 50px;
+        height: 100px;
         position:relative;
-        bottom: 0;
+        bottom: -5px;
         text-align: center;
     }
     .footers{

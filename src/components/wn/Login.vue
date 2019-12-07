@@ -10,9 +10,9 @@
         </header>
         <div class="login-content">
         <mt-field label="用户名" placeholder="请输入用户名" v-model="uname" :attr="{autofocus:true}"></mt-field>
-        <mt-field label="密码" placeholder="请输入密码" v-model="upwd"></mt-field>
+        <mt-field label="密码" placeholder="请输入密码" type="password" v-model="upwd"></mt-field>
         <mt-button size="large" @click="login" class="btn">登录</mt-button>
-        <router-link to="/register" class="reg">注册</router-link>
+        <router-link to="/register" class="reg">注 册</router-link>
         </div>
     </div>
 </template>
@@ -51,7 +51,10 @@ export default {
                    this.$messagebox("消息","用户名或密码有误");
                }else{
                    this.$toast("登录成功");
-               }
+                   sessionStorage.setItem("lastname",name);
+                   console.log(sessionStorage);
+                   this.$router.push("/my");
+              }
            });
         }
     }

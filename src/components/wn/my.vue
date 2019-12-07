@@ -3,11 +3,15 @@
         <mt-header class="top"></mt-header>
         <router-link to="/index"><img :src="img" class="image"/></router-link>
         <div class="title">个人中心</div>
-        <mt-tab-item class="icon">
-            <img src="../../../wnyx/public/ucbanner.jpg" class="images" />
+        <img src="../../../wnyx/public/ucbanner.jpg" class="images" />
+        <mt-tab-item class="icon" v-if="!login">    
             <router-link to="/login" class="login"></router-link>
             <p class="text">享受更多贴心服务</p>
         </mt-tab-item>
+        <div v-else class="name">
+            <p>{{name}}</p>
+            <p>欢迎</p>
+        </div>
         <div class="order ol">
             <router-link to="" class="ignb">订单查询</router-link>
         </div>
@@ -17,6 +21,7 @@
         <div class="order url">
             <router-link to="" class="ignb">地址管理</router-link>
         </div>
+        <mt-button @click="logout" v-if="!show()">注销</mt-button>
         <mt-tab-item class="footer">
             <router-link to="/login" class="log">登录</router-link>
             |
@@ -31,7 +36,26 @@
 export default {
     data(){
         return {
-            img:require("../../img/home.png")
+            img:require("../../img/home.png"),
+            name:sessionStorage.getItem("lastname"),
+            login:false
+        }
+    },
+    methods:{
+        show(){
+            if(sessionStorage.length==1){
+                this.login=true;
+            }else if(sessionStorage.length == 0){
+                this.login=false;
+            }
+        },
+        logout(){
+            if(sessionStorage.length==1){
+                sessionStorage.clear();
+                history.go(0);
+            }else{
+                return;
+            }
         }
     }
 }
@@ -135,5 +159,11 @@ export default {
         text-decoration: none;
         font-size:14px;
         padding:0 10px;
+    }
+    .name{
+        position: relative;
+        top: -120px;
+        z-index: 1;
+        color: #fff;
     }
 </style>

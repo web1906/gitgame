@@ -8,6 +8,9 @@ import axios from "axios"
 import MintUi from 'mint-ui'
 import "./font/iconfont.css"
 import "mint-ui/lib/style.css"
+import 'vant/lib/index.css';
+import Popup from 'vant';
+
 
 axios.defaults.baseURL="http://127.0.0.1:4000/"
 axios.defaults.withCredentials=true
@@ -16,13 +19,16 @@ Vue.prototype.axios=axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+Vue.use(Popup)
 Vue.use(MintUi)
 Vue.use(Vuex)
 
 var store = new Vuex.Store({
   state:{ //共享:数据
     fa:12, //共享:亮哥发量
-    cartCount:0
+    cartCount:0,
+    count:1,
+    show:false
   },
   mutations:{//修改共享数据
   reduce(state){
@@ -56,7 +62,7 @@ var store = new Vuex.Store({
       },500)
     }
   }
-  })
+})
 
 new Vue({
   el: '#app',

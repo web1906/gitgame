@@ -31,7 +31,7 @@
                 <div class="mkleft row-item br1">
                     <a href="javascript:;"><img src="../../../wnyx/public/phonesim.jpeg" class="f-img"></a>
                 </div>
-                <div class="mkright row-item">
+                <div class="mkright row-item" style="width:50%">
                     <div class="mktop bb1">
                         <a href="javascript:;"><img src="../../../wnyx/public/30miank.jpeg" class="f-img"></a> 
                     </div>
@@ -200,7 +200,7 @@ export default {
     }
     .main{margin-top:10px;}
     .lunbo {
-        height: 220px;
+        height: 200px;
         position: relative;
         top:0;
     }
@@ -262,27 +262,19 @@ export default {
         border-right: 1px solid #f0f0f0;
     }
     .mkleft{
-        width: 12rem;
+        width: 50%;
     }
     .f-img {
         width: 100%;
     }
     .mkbt,.mktop {
-        width: 15rem;
+        width: 100%;
     }
     .adv a img {
-        width: 26rem;
+        width: 100%;
     }
     .mint-swipe-indicators{bottom:0;}
-    .footer{
-        width: 100%;
-        position: relative;
-        color:#999896;
-        font-size: 14px;
-        top:-20px;
-        text-align: center;
-        padding: 15px 0 20px 0;
-    }
+    
     .inline{
         padding: 5px 0 0 0;
         display: inline-block;

@@ -31,4 +31,8 @@ a{text-decoration: none;color:#999896;}
   text-align: center;
   color: #2c3e50;
 }
+.footer{
+  width: 100%;
+  padding: 15px 0 20px 0;
+}
 </style>

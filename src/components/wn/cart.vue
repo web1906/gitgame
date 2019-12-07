@@ -111,7 +111,7 @@ export default {
             var url="hopcart"
             this.axios.get(url).then(res=>{
                 console.log(res.data.code);
-                if(res.data.code==-1){
+                if(res.data.code==-1 || sessionStorage.length==0){
                     this.$messagebox("消息","请登录").then(res=>{
                         this.$router.push("/Login");
                     })

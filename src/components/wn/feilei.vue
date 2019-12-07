@@ -131,7 +131,7 @@ export default {
         width:100%;
         height:50px;
         display: flex;
-        position: absolute;
+        position: fixed;
         top:0;
         left: 0;
         background:#f2f1ed;
@@ -144,7 +144,7 @@ export default {
         left:0;
         width: 30px;
         top: 10px;
-        position: absolute;
+        position: fixed;
         z-index: 1;
     }
     .list{
@@ -155,19 +155,19 @@ export default {
         left: 0;
         top: 50px;
         background: #f1f2ed;
-        position: absolute;
+        position: fixed;
         z-index: 1;
     }
     #search{
         border:0px;
         display: flex;
         height:30px;
-        background-color:#ccc;
         margin-top:-30px;
         padding:0 0 0 125px;
         border-radius: 10px;
-        position: relative;
-        top: -5px;
+        position: fixed;
+        top: 40px;
+        z-index: 1;
     }
     .mt-tab-item{padding:17px 0;}
     .mt-tab-container-item{

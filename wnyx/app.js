@@ -164,6 +164,7 @@ server.get("/addcart",(req,res)=>{
  var lid=req.query.lid;
  var lname=req.query.lname;
  var price=req.query.price;
+ var count=req.query.count;
  var img=req.query.img;
  //5:查询指定用户是否购买过此商品
  var sql = "SELECT uid FROM wn_yx_cart WHERE uid = ? AND lid = ?";
@@ -173,10 +174,10 @@ server.get("/addcart",(req,res)=>{
   //7:在回调函数判断是否购买过
   if(result.length==0){
   //8:添加一条数据
-  var sql = `INSERT INTO wn_yx_cart VALUES(null,${lid},1,'${lname}',${price},${uid},'${img}')`;
+  var sql = `INSERT INTO wn_yx_cart VALUES(null,${lid},${count},'${lname}',${price},${uid},'${img}')`;
   }else{
   //9:更新一条数据
-  var sql = `UPDATE wn_yx_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
+  var sql = `UPDATE wn_yx_cart SET count=${count}+count WHERE uid=${uid} AND lid=${lid}`;
   }
   //10:执行sql
   pool.query(sql,(err,result)=>{
